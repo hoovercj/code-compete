@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using CodeCompete.DotNet.Interfaces;
 
-namespace CodeCompeteDotNet
+namespace CodeCompete.DotNet.Implementation
 {
     public abstract class AbstractGame : Game
     {

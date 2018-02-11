@@ -1,17 +1,16 @@
 ﻿using System;
-using CodeCompeteDotNet;
-using ConsoleTicTacToePlayer;
-using SimpleComputerTicTacToePlayer;
-using TicTacToeDotNet;
+using CodeCompete.DotNet.Interfaces;
+using CodeCompete.DotNet.TicTacToe;
+using CodeCompete.DotNet.TicTacToe.Players;
 
-namespace ConsoleGameHost
+namespace CodeComplete.DotNet.Examples
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var player1 = new ConsoleTicTacToePlayer.ConsoleTicTacToePlayer("1");
-            var player2 = new SimpleComputerTicTacToePlayer.SimpleComputerTicTacToePlayer("2");
+            var player1 = new ConsoleTicTacToePlayer("1");
+            var player2 = new SimpleComputerTicTacToePlayer("2");
             var game = new TicTacToeGame(new GamePlayer[] { player1, player2});
 
             var result = game.PlayGame();

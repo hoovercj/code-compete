@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeCompeteDotNet
+namespace CodeCompete.DotNet.Interfaces
 {
     // Runtime Interfaces
     public interface Game : IGameState

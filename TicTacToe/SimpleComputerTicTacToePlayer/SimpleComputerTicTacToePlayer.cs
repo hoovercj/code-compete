@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Immutable;
-using CodeCompeteDotNet;
-using TicTacToeDotNet;
+using CodeCompete.DotNet.Interfaces;
 
-namespace SimpleComputerTicTacToePlayer
+namespace CodeCompete.DotNet.TicTacToe.Players
 {
     public class SimpleComputerTicTacToePlayer : GamePlayer
     {

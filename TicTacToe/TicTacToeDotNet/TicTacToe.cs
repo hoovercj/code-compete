@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using CodeCompeteDotNet;
+using CodeCompete.DotNet.Interfaces;
+using CodeCompete.DotNet.Implementation;
 
-namespace TicTacToeDotNet
+namespace CodeCompete.DotNet.TicTacToe
 {
     using TicTacToeBoard = ImmutableArray<ImmutableArray<string>>;
 
     public class TicTacToeMove : IGameMove
     {
-
         public string PlayerId { get { return lastPlayerId; } }
 
         public object State { get { return this.Board; } }
