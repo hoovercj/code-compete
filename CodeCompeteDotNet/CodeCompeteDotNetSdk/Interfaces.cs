@@ -5,7 +5,6 @@ namespace CodeCompete.DotNet.Interfaces
     // Runtime Interfaces
     public interface Game : IGameState
     {
-        // IGameState PlayGame(GamePlayer[] players, IGameState initialState);
         IGameState PlayGame();
     }
 
