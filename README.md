@@ -12,7 +12,7 @@ _Prerequisites_: Install the [dotnet core sdk](https://www.microsoft.com/net/lea
 
 ```shell
 git clone https://github.com/hoovercj/code-compete.git
-cd ConsoleGameHost
+cd code-compete/ConsoleGameHost
 dotnet restore
 dotnet run
 ```
