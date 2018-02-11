@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CodeCompeteDotNet\CodeCompeteDotNet.csproj" />
+    <ProjectReference Include="..\..\CodeCompeteDotNet\CodeCompeteDotNetSdk\CodeCompeteDotNetSdk.csproj" />
     <ProjectReference Include="..\TicTacToeDotNet\TicTacToeDotNet.csproj" />
   </ItemGroup>
 

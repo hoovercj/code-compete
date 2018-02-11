@@ -6,11 +6,18 @@ using CodeCompete.DotNet.Interfaces;
 
 namespace CodeCompete.DotNet.Implementation
 {
+    public class IllegalMoveException : Exception
+    {
+        public IllegalMoveException() {}
+        public IllegalMoveException(string message) : base(message) {}
+        public IllegalMoveException(string message, Exception inner) : base(message, inner) {}
+    }
+
     public abstract class AbstractGame : Game
     {
         // Serializable functions to satisfy the IGameState interface
-        public IPlayer[] Players { get { return players.ToArray(); } }
-        public IGameMove[] GameMoves { get { return moves.ToArray(); } }
+        public IPlayer[] Players { get { return players == null ? null : players.ToArray(); } }
+        public IGameMove[] GameMoves { get { return moves == null ? null : moves.ToArray(); } }
 
         public abstract IPlayer Winner { get; }
 
@@ -46,7 +53,7 @@ namespace CodeCompete.DotNet.Implementation
                 return move;
             }
 
-            throw new Exception("Illegal move");
+            throw new IllegalMoveException("Illegal move");
         }
 
         protected abstract GamePlayer CurrentPlayer { get; }
