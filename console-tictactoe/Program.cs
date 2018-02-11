@@ -8,9 +8,10 @@ namespace console_tictactoe
         {
             Console.WriteLine("Hello World!");
 
-            var player1 = new TicTacToePlayer("1");
-            var player2 = new TicTacToePlayer("2");
-            var game = new TicTacToeGame(new TicTacToePlayer[] { player1, player2});
+            // var player1 = new SimpleTicTacToePlayer("1");
+            var player1 = new ConsoleTicTacToePlayer("1");
+            var player2 = new SimpleTicTacToePlayer("2");
+            var game = new TicTacToeGame(new GamePlayer[] { player1, player2});
 
             var result = game.PlayGame();
             var finalState = ((TicTacToeMove)(result.GameMoves[result.GameMoves.Length - 1])).Board;
