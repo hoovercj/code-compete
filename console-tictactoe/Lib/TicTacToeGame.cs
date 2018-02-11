@@ -131,8 +131,8 @@ namespace console_tictactoe
         protected override void AfterMove()
         {
             TicTacToeMove lastMove = (TicTacToeMove)this.moves[this.moves.Length - 1];
-            this.isOver = !this.MovesLeft(lastMove);
             this.winner = this.GetWinner(lastMove);
+            this.isOver = this.winner != null || !this.MovesLeft(lastMove);
 
             this.currentPlayerIndex = ++this.currentPlayerIndex % 2;
         }

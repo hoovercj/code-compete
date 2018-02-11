@@ -33,7 +33,7 @@ namespace console_tictactoe
         {
             BeforeMove();
             IGameMove newMove = this.DoMove(player, this);
-            this.moves.Add(newMove);
+            this.moves = this.moves.Add(newMove);
             AfterMove();
         }
 
