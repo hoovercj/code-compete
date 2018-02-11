@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeCompeteDotNet\CodeCompeteDotNet.csproj" />
+    <ProjectReference Include="..\TicTacToe\SimpleComputerTicTacToePlayer\SimpleComputerTicTacToePlayer.csproj" />
+    <ProjectReference Include="..\TicTacToe\ConsoleTicTacToePlayer\ConsoleTicTacToePlayer.csproj" />
+    <ProjectReference Include="..\TicTacToe\TicTacToeDotNet\TicTacToeDotNet.csproj" />
+  </ItemGroup>
+
+</Project>
