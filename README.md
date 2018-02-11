@@ -11,7 +11,7 @@ Then users can pit their players against others.
 _Prerequisites_: Install the [dotnet core sdk](https://www.microsoft.com/net/learn/get-started/)
 
 ```shell
-git clone https://github.com/hoovercj/code-compete
+git clone https://github.com/hoovercj/code-compete.git
 cd ConsoleGameHost
 dotnet restore
 dotnet run
