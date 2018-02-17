@@ -9,7 +9,7 @@ namespace CodeCompete.GameService
     {
         static void Main(string[] args)
         {
-            string directory = Environment.CurrentDirectory;
+            string directory = Path.Combine(Environment.CurrentDirectory, "Games");
 
             if (args.Length > 0)
             {
@@ -20,14 +20,15 @@ namespace CodeCompete.GameService
                 }
                 else
                 {
-                    Console.WriteLine($"Using CWD because provided directory could not be found: {candidate}");
+                    Console.WriteLine($"Using {directory} because provided directory could not be found: {candidate}");
                 }
             }
 
             string resultsDirectory = Path.Combine(directory, "results");
-            if (!Directory.Exists(resultsDirectory)) {
-                Directory.CreateDirectory(resultsDirectory);
+            if (Directory.Exists(resultsDirectory)) {
+                Directory.Delete(resultsDirectory);
             }
+            Directory.CreateDirectory(resultsDirectory);
 
             string[] gameDirectories = Directory.GetDirectories(directory).Where(d => d != resultsDirectory).ToArray();
 
@@ -53,6 +54,7 @@ namespace CodeCompete.GameService
             string gameExe = Directory.GetFiles(gameDir).First(f => Path.GetExtension(f) == ".exe");
             string gameArgs = $"{playerId1} {playerExe1} {playerId2} {playerExe2} {resultsPath}";
 
+            Console.WriteLine($"Starting game process: {gameExe} {string.Join(" ", gameArgs)}");
             Process gameProcess = Process.Start(gameExe, gameArgs);
             gameProcess.WaitForExit();
         }

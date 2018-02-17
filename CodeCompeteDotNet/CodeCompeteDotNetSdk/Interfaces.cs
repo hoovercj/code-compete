@@ -3,36 +3,54 @@
 namespace CodeCompete.DotNet.Interfaces
 {
     // Runtime Interfaces
-    public interface Game : IGameState
+    public interface IGame<T>
     {
-        IGameState PlayGame();
-    }
+        GameState<T> GameState { get; }
 
-    public interface GamePlayer : IPlayer {
-        IGameMove DoMove(IGameState game);
+        GameState<T> PlayGame();
+
+        void BeforeMove();
+
+        void AfterMove();
     }
 
     // Serialization Interfaces
-    public interface IGameState
+    public class GameState<T>
     {
-        IPlayer[] Players { get; }
+        public GamePlayer<T>[] Players { get; }
 
-        IGameMove[] GameMoves { get; }
+        public GameMove<T>[] GameMoves { get; }
 
-        IPlayer Winner { get; }
+        public GamePlayer<T> Winner { get; }
 
-        bool IsOver { get; }
+        public bool IsOver { get; }
+
+        public GameState(GamePlayer<T>[] players, GameMove<T>[] gameMoves, GamePlayer<T> winner, bool isOver)
+        {
+            this.Players = players;
+            this.GameMoves = gameMoves;
+            this.Winner = winner;
+            this.IsOver = isOver;
+        }
     }
 
-    public interface IGameMove
+    public class GameMove<T>
     {
-        string PlayerId { get; }
+        public virtual string PlayerId { get; }
 
-        object State { get; }
+        public virtual T State { get; }
+
+        public GameMove(string playerId, T state)
+        {
+            this.PlayerId = playerId;
+            this.State = state;
+        }
     }
 
-    public interface IPlayer
+    public class GamePlayer<T>
     {
-        string Id { get; }
+        public virtual string Id { get; }
+
+        public virtual GameMove<T> DoMove(GameState<T> game) { return null; }
     }
 }

@@ -13,41 +13,62 @@ namespace CodeCompete.DotNet.Implementation
         public IllegalMoveException(string message, Exception inner) : base(message, inner) {}
     }
 
-    public abstract class AbstractGame : Game
+    public abstract class AbstractGame<T> : IGame<T>
     {
-        // Serializable functions to satisfy the IGameState interface
-        public IPlayer[] Players { get { return players == null ? null : players.ToArray(); } }
-        public IGameMove[] GameMoves { get { return moves == null ? null : moves.ToArray(); } }
+        // Abstract/virtual properties and methods available to subclasses
+        // to execute the game
+        protected abstract GamePlayer<T> Winner { get; }
 
-        public abstract IPlayer Winner { get; }
+        protected abstract bool IsOver { get; }
 
-        public abstract bool IsOver { get; }
+        protected abstract GamePlayer<T> CurrentPlayer { get; }
 
-        // Runtime instance variables
-        protected ImmutableArray<GamePlayer> players;
-        protected ImmutableArray<IGameMove> moves;
+        protected abstract bool ValidateMove(GameState<T> game, GameMove<T> move);
 
-        public IGameState PlayGame()
+        // Immutable collections used by subclasses but controlled by this class
+        protected ImmutableArray<GamePlayer<T>> players;
+        protected ImmutableArray<GameMove<T>> moves;
+
+        // Public property used to serialize the game state
+        public GameState<T> GameState {
+            get {
+                return new GameState<T>(
+                    players.ToArray(),
+                    moves.ToArray(),
+                    this.Winner,
+                    this.IsOver
+                );
+            }
+        }
+
+        // Public Interface Methods
+
+        public GameState<T> PlayGame()
         {
-            while(!this.IsOver)
+            while(!this.GameState.IsOver)
             {
                 this.RequestMove(this.CurrentPlayer);
             }
 
-            return this;
+            return this.GameState;
         }
 
-        private void RequestMove(GamePlayer player)
+        public virtual void BeforeMove() {}
+        public virtual void AfterMove() {}
+
+        // Private methods
+
+        private void RequestMove(GamePlayer<T> player)
         {
             BeforeMove();
-            IGameMove newMove = this.DoMove(player, this);
+            GameMove<T> newMove = this.DoMove(player, this.GameState);
             this.moves = this.moves.Add(newMove);
             AfterMove();
         }
 
-        private IGameMove DoMove(GamePlayer player, IGameState state)
+        private GameMove<T> DoMove(GamePlayer<T> player, GameState<T> state)
         {
-            IGameMove move = player.DoMove(state);
+            GameMove<T> move = player.DoMove(state);
             if (this.ValidateMove(state, move))
             {
                 return move;
@@ -55,12 +76,5 @@ namespace CodeCompete.DotNet.Implementation
 
             throw new IllegalMoveException("Illegal move");
         }
-
-        protected abstract GamePlayer CurrentPlayer { get; }
-
-        protected abstract bool ValidateMove(IGameState game, IGameMove move);
-
-        protected virtual void BeforeMove() {}
-        protected virtual void AfterMove() {}
     }
 }

@@ -1,36 +1,39 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Immutable;
 using CodeCompete.DotNet.Interfaces;
 
 namespace CodeCompete.DotNet.TicTacToe.Players
 {
-    public class SimpleComputerTicTacToePlayer : GamePlayer
+    public class SimpleComputerTicTacToePlayer : GamePlayer<string[][]>
     {
-        private string id;
+        private readonly string id;
 
-        public string Id => id;
+        public override string Id => id;
 
         public SimpleComputerTicTacToePlayer(string id)
         {
             this.id = id;
         }
 
-        public IGameMove DoMove(IGameState state)
+        public override GameMove<string[][]> DoMove(GameState<string[][]> state)
         {
             var states = state.GameMoves;
-            TicTacToeMove lastState = (TicTacToeMove)states[states.Length -1];
+            GameMove<string[][]> lastState = states[states.Length -1];
 
-            for (int r = 0; r < lastState.Board.Length; r++)
+            string[][] board = (string[][])lastState.State;
+
+            for (int r = 0; r < board.Length; r++)
             {
-                ImmutableArray<string> row = lastState.Board[r];
+                string[] row = board[r];
                 for (int c = 0; c < row.Length; c++)
                 {
                     if (String.IsNullOrWhiteSpace(row[c]))
                     {
-                        ImmutableArray<string> newRow = row.SetItem(c, this.Id);
-                        ImmutableArray<ImmutableArray<string>> newBoard = lastState.Board.SetItem(r, newRow);
+                        string[][] newBoard = board.Select(s => s.ToArray()).ToArray();
+                        newBoard[r][c] = this.Id;
 
-                        return new TicTacToeMove(this.Id, newBoard);
+                        return new GameMove<string[][]>(this.Id, newBoard);
                     }
                 }
             }

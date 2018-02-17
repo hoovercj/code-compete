@@ -90,7 +90,7 @@ Game Host: (dotnet DONE)
     - Matches the language of the game
     - Takes a list of players somehow (config file, main args, etc.)
     - Instantiates PlayerWrappers for the players
-    - Passes players to the game, runs the game, and handles the results
+    - Passes players to the game, calls "PlayGame", and handles the results
 
 Game Service: (dotnet DONE)
     - A method that executes a game host

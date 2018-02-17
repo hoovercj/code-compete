@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using CodeCompete.DotNet.Interfaces;
+using CodeCompete.DotNet.Implementation;
 using CodeCompete.DotNet.TicTacToe.Players;
 using CodeCompete.DotNet.TicTacToe;
 
@@ -11,15 +12,20 @@ namespace CodeCompete.DotNet.PlayerHost
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("DotNetPlayerHost");
+
             int i = 0;
             string id = args[i++];
+            Console.WriteLine(id);
             string inPath = args[i++];
+            Console.WriteLine(inPath);
             string outPath = args[i++];
+            Console.WriteLine(outPath);
 
-            TicTacToeGame state = JsonConvert.DeserializeObject<TicTacToeGame>(System.IO.File.ReadAllText(inPath));
+            GameState<string[][]> state = JsonConvert.DeserializeObject<GameState<string[][]>>(System.IO.File.ReadAllText(inPath));
             // TODO: Use DI/IoC container to fix this because an abstract getter can't be used for static classes
             var player = new SimpleComputerTicTacToePlayer(id);
-            TicTacToeMove move = (TicTacToeMove)player.DoMove(state);
+            GameMove<string[][]> move = player.DoMove(state);
 
             System.IO.File.WriteAllText(outPath, JsonConvert.SerializeObject(move));
         }

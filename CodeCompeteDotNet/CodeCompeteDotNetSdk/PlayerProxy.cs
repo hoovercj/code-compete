@@ -7,7 +7,7 @@ using CodeCompete.DotNet.Interfaces;
 
 namespace CodeCompete.DotNet.Implementation
 {
-    public class PlayerProxy : GamePlayer
+    public class PlayerProxy<T> : GamePlayer<T>
     {
         private readonly string id;
 
@@ -15,7 +15,7 @@ namespace CodeCompete.DotNet.Implementation
 
         private readonly string cwd;
 
-        public string Id => id;
+        public override string Id => id;
 
         public PlayerProxy(string id, string cwd, string exe)
         {
@@ -24,7 +24,7 @@ namespace CodeCompete.DotNet.Implementation
             this.exe = exe;
         }
 
-        public IGameMove DoMove(IGameState game)
+        public override GameMove<T> DoMove(GameState<T> game)
         {
             string resultsDir = Path.Combine(this.cwd, this.id);
             Console.WriteLine($"Enure results directory exists: {resultsDir}");
@@ -36,11 +36,12 @@ namespace CodeCompete.DotNet.Implementation
             Console.WriteLine($"Write state to file: {statePath}");
             File.WriteAllText(statePath, JsonConvert.SerializeObject(game));
 
+            Console.WriteLine($"Starting player process: {this.exe} {string.Join(" ", args)}");
             Process process = Process.Start(this.exe, args);
             process.WaitForExit();
 
-            Console.WriteLine($"Read new move from file: ${movePath}");
-            IGameMove move = JsonConvert.DeserializeObject<IGameMove>(File.ReadAllText(movePath));
+            Console.WriteLine($"Read new move from file: {movePath}");
+            GameMove<T> move = JsonConvert.DeserializeObject<GameMove<T>>(File.ReadAllText(movePath));
 
             // TODO: clean up files
 
