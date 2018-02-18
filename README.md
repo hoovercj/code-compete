@@ -36,7 +36,7 @@ See [SimpleComputerTicTacToePlayer.cs](TicTacToe/SimpleComputerTicTacToePlayer/S
 
 A host is the service that orchestrates a game. An example is [ConsoleGameHost/Program.cs](ConsoleGameHost/Program.cs) which is a .net core console app which starts a Tic Tac Toe game with a computer player and a console player.
 
-A host could be made to communicate with players across processes or networks, as well.
+A more complicated example is [CliGameService] which executes games and players in separate processes and serializes between them using files.
 
 ## Plan
 
@@ -46,7 +46,7 @@ Below is a tentative (and non-exhaustive) list of steps I'll be taking.
 
 * [X] Write a .net core implementation of a tic-tac-toe game based on the concept of a "game" with "players" outlined above
 * [X] Write a console app "host" that that allows playing the above game
-* [ ] Write wrappers for "players" and "games" so that hosts can communicate with players and/or games in different processes, online, etc.
+* [X] Write wrappers for "players" and "games" so that hosts can communicate with players and/or games in different processes, online, etc.
 * [ ] Write a good Tic Tac Toe player in Javascript (node.js) and host to communicate with it in a different process
 
 ### Long-Term
@@ -55,53 +55,3 @@ Below is a tentative (and non-exhaustive) list of steps I'll be taking.
 * [ ] Improve the server to allow new games and players to be added directly from the server
 * [ ] Add "users"
 * [ ] Make it pretty
-
-
-
-
-
-
-
-GamePlayer: (dotnet DONE)
-    - doMove(state); : one function that takes a state object
-
-PlayerHost: (dotnet DONE)
-    - Written in every supported language.
-    - Matches the language of the player
-    - main(playerId, statePath, outPath) { writeFile(outPath, player.doMove(parse(readFile(statePath))));}
-    - Built as an executable file / module / etc. that receives the state when it is called
-    - References the player code (either inlines the code or imports it somehow)
-    - Passes the state to the player code and serializes the result out to a file
-
-PlayerProxy: (dotnet DONE)
-    - Written in every supported language.
-    - Matches the language of the game
-    - doMove(exePath, args) : one function that takes a path to a player exe and the args needed to execute it (state, etc.)
-    - Spawns the actual PlayerHost process and waits for the output from stdio to return to the caller
-
-Game: (dotnet DONE)
-    - Written in every supported language
-    - Matches the language of the game
-    - Game language matrix may be smaller than player language matrix
-    - Takes a list of players, plays the game with them
-
-Game Host: (dotnet DONE)
-    - Written in every supported language
-    - Matches the language of the game
-    - Takes a list of players somehow (config file, main args, etc.)
-    - Instantiates PlayerWrappers for the players
-    - Passes players to the game, calls "PlayGame", and handles the results
-
-Game Service: (dotnet DONE)
-    - A method that executes a game host
-    - Could be cli, console, web, etc.
-    - First: dotnet console service
-        * launches and looks in sub-directories for games and players
-        * Provies them as options to choose from the cli
-        exe
-        |---- Game1/
-        |     |---- Player1/
-        |     |---- Player2/
-        |---- Game2/
-              |---- Player2/
-              |---- Player3/

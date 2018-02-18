@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeCompeteDotNet", "CodeCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompeteDotNetSdk", "CodeCompeteDotNet\CodeCompeteDotNetSdk\CodeCompeteDotNetSdk.csproj", "{BA243549-2583-4D16-A10F-ECFCD9BBFD95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompeteDotNetSdk.Tests", "CodeCompeteDotNet\CodeCompeteDotNetSdk.Tests\CodeCompeteDotNetSdk.Tests.csproj", "{5C71B59E-58EB-4A57-8B51-A8BE7C9F6D66}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetPlayerHost", "CodeCompeteDotNet\DotNetPlayerHost\DotNetPlayerHost.csproj", "{7A862A1C-A2D7-433A-9542-00CB1D795D1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGameHost", "ConsoleGameHost\ConsoleGameHost.csproj", "{B048292F-FECA-4D3A-B0D3-8FDD38BBD434}"

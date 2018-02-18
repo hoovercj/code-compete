@@ -7,29 +7,6 @@ using Newtonsoft.Json;
 
 namespace CodeCompete.DotNet.TicTacToe
 {
-    // [JsonObject(MemberSerialization.OptIn)]
-    // public class TicTacToeMove : GameMove<string[][]>
-    // {
-    //     [JsonProperty] public override string PlayerId { get { return lastPlayerId; } }
-
-    //     [JsonProperty] public override string[][] State { get { return this.Board; } }
-
-    //     public readonly string lastPlayerId;
-    //     public readonly string[][] Board;
-
-    //     public TicTacToeMove() : this(null, new string[][] {
-    //             new string[] {null, null, null},
-    //             new string[] {null, null, null},
-    //             new string[] {null, null, null}
-    //     }) { }
-
-    //     public TicTacToeMove(string lastPlayerId, string[][] board)
-    //     {
-    //         this.lastPlayerId = lastPlayerId;
-    //         this.Board = board;
-    //     }
-    // }
-
     public class TicTacToeGame : AbstractGame<string[][]>
     {
         private bool isOver;

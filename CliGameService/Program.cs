@@ -45,11 +45,11 @@ namespace CodeCompete.GameService
             while (!PromptUserForChoice("player", playerDirectories, out playerChoice2)) {};
             string playerDirectory2 = playerDirectories[playerChoice2];
 
-            string playerId1 = "Player1";//args[1];
+            string playerId1 = "Player1";
             string playerExe1 = Directory.GetFiles(playerDirectory1).First(f => Path.GetExtension(f) == ".exe");//args[2]
-            string playerId2 = "Player2";//args[3];
+            string playerId2 = "Player2";
             string playerExe2 = Directory.GetFiles(playerDirectory2).First(f => Path.GetExtension(f) == ".exe");//args[4]
-            string resultsPath = resultsDirectory;//args[5];
+            string resultsPath = resultsDirectory;
 
             string gameExe = Directory.GetFiles(gameDir).First(f => Path.GetExtension(f) == ".exe");
             string gameArgs = $"{playerId1} {playerExe1} {playerId2} {playerExe2} {resultsPath}";
