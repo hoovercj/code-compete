@@ -5,16 +5,9 @@ using CodeCompete.DotNet.Interfaces;
 
 namespace CodeCompete.DotNet.TicTacToe.Players
 {
-    public class ConsoleTicTacToePlayer : GamePlayer<string[][]>
+    public class ConsolePlayer : GamePlayer<string[][]>
     {
-        private string id;
-
-        public override string Id => id;
-
-        public ConsoleTicTacToePlayer(string id)
-        {
-            this.id = id;
-        }
+        public ConsolePlayer() {}
 
         public override GameMove<string[][]> DoMove(IGameStateProvider stateProvider)
         {
@@ -45,7 +38,7 @@ namespace CodeCompete.DotNet.TicTacToe.Players
 
             string[][] newBoard = board.Select(s => s.ToArray()).ToArray();
 
-            newBoard[chosenRow][chosenColumn] = this.id;
+            newBoard[chosenRow][chosenColumn] = this.Id;
 
             return new GameMove<string[][]>(this.Id, newBoard);
         }

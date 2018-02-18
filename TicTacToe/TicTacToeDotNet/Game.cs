@@ -5,9 +5,9 @@ using CodeCompete.DotNet.Interfaces;
 using CodeCompete.DotNet.Implementation;
 using Newtonsoft.Json;
 
-namespace CodeCompete.DotNet.TicTacToe
+namespace CodeCompete.DotNet.TicTacToe.Games
 {
-    public class TicTacToeGame : AbstractGame<string[][]>
+    public class TicTacToe : AbstractGame<string[][]>
     {
         private bool isOver;
         private GamePlayer<string[][]> winner;
@@ -19,7 +19,7 @@ namespace CodeCompete.DotNet.TicTacToe
         protected override bool IsOver => isOver;
         protected override GamePlayer<string[][]> CurrentPlayer => players[currentPlayerIndex];
 
-        public TicTacToeGame(GamePlayer<string[][]>[] players)
+        public TicTacToe(GamePlayer<string[][]>[] players)
         {
             if (players.Length != 2) throw new ArgumentOutOfRangeException(nameof(players), "Tic Tac Toe requires exactly 2 players");
             if (players[0].Id == players[1].Id) throw new ArgumentException(nameof(players), "Players cannot have the same Id");

@@ -4,15 +4,10 @@ using CodeCompete.DotNet.Interfaces;
 
 namespace CodeCompete.DotNet.TicTacToe.Players
 {
-    public class SimpleComputerTicTacToePlayer : GamePlayer<string[][]>
+    public class SimpleComputerPlayer : GamePlayer<string[][]>
     {
-        private readonly string id;
-
-        public override string Id => id;
-
-        public SimpleComputerTicTacToePlayer(string id)
+        public SimpleComputerPlayer()
         {
-            this.id = id;
         }
 
         public override GameMove<string[][]> DoMove(IGameStateProvider stateProvider)

@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodeCompeteDotNet\CodeCompeteDotNetSdk\CodeCompeteDotNetSdk.csproj" />
-    <ProjectReference Include="..\TicTacToe\SimpleComputerTicTacToePlayer\SimpleComputerTicTacToePlayer.csproj" />
-    <ProjectReference Include="..\TicTacToe\ConsoleTicTacToePlayer\ConsoleTicTacToePlayer.csproj" />
+    <ProjectReference Include="..\CodeCompeteDotNet.Sdk\CodeCompeteDotNet.Sdk.csproj" />
+    <ProjectReference Alias="Console" Include="..\TicTacToe\SimpleComputerTicTacToePlayer\SimpleComputerTicTacToePlayer.csproj" />
+    <ProjectReference Alias="Computer" Include="..\TicTacToe\ConsoleTicTacToePlayer\ConsoleTicTacToePlayer.csproj" />
     <ProjectReference Include="..\TicTacToe\TicTacToeDotNet\TicTacToeDotNet.csproj" />
   </ItemGroup>
 
