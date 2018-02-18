@@ -2,7 +2,11 @@
 
 namespace CodeCompete.DotNet.Interfaces
 {
-    // Runtime Interfaces
+    public interface IGameStateProvider
+    {
+        GameState<T> ProvideState<T>();
+    }
+
     public interface IGame<T>
     {
         GameState<T> GameState { get; }
@@ -14,7 +18,22 @@ namespace CodeCompete.DotNet.Interfaces
         void AfterMove();
     }
 
-    // Serialization Interfaces
+    public class SimpleGameStateProvider : IGameStateProvider
+    {
+
+        object state;
+
+        public SimpleGameStateProvider(object obj)
+        {
+            this.state = obj;
+        }
+
+        public GameState<T> ProvideState<T>()
+        {
+            return (GameState<T>) this.state;
+        }
+    }
+
     public class GameState<T>
     {
         public GamePlayer<T>[] Players { get; }
@@ -51,6 +70,6 @@ namespace CodeCompete.DotNet.Interfaces
     {
         public virtual string Id { get; set; }
 
-        public virtual GameMove<T> DoMove(GameState<T> game) { return null; }
+        public virtual GameMove<T> DoMove(IGameStateProvider gameProvider) { return null; }
     }
 }

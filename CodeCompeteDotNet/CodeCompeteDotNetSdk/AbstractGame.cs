@@ -68,7 +68,8 @@ namespace CodeCompete.DotNet.Implementation
 
         private GameMove<T> DoMove(GamePlayer<T> player, GameState<T> state)
         {
-            GameMove<T> move = player.DoMove(state);
+
+            GameMove<T> move = player.DoMove(new SimpleGameStateProvider(state));
             if (this.ValidateMove(state, move))
             {
                 return move;

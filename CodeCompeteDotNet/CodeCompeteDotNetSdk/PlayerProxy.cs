@@ -24,7 +24,7 @@ namespace CodeCompete.DotNet.Implementation
             this.exe = exe;
         }
 
-        public override GameMove<T> DoMove(GameState<T> game)
+        public override GameMove<T> DoMove(IGameStateProvider stateProvider)
         {
             string resultsDir = Path.Combine(this.cwd, this.id);
             Console.WriteLine($"Enure results directory exists: {resultsDir}");
@@ -34,7 +34,7 @@ namespace CodeCompete.DotNet.Implementation
             string args = $"{this.id} \"{statePath}\" \"{movePath}\"";
 
             Console.WriteLine($"Write state to file: {statePath}");
-            File.WriteAllText(statePath, JsonConvert.SerializeObject(game));
+            File.WriteAllText(statePath, JsonConvert.SerializeObject(stateProvider.ProvideState<T>()));
 
             Console.WriteLine($"Starting player process: {this.exe} {string.Join(" ", args)}");
             Process process = Process.Start(this.exe, args);

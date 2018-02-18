@@ -16,8 +16,9 @@ namespace CodeCompete.DotNet.TicTacToe.Players
             this.id = id;
         }
 
-        public override GameMove<string[][]> DoMove(GameState<string[][]> state)
+        public override GameMove<string[][]> DoMove(IGameStateProvider stateProvider)
         {
+            var state = stateProvider.ProvideState<string[][]>();
             var states = state.GameMoves;
             GameMove<string[][]> lastState = states[states.Length -1];
             string[][] board = lastState.State;
