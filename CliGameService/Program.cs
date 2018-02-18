@@ -46,9 +46,9 @@ namespace CodeCompete.GameService
             string playerDirectory2 = playerDirectories[playerChoice2];
 
             string playerId1 = "Player1";
-            string playerExe1 = Directory.GetFiles(playerDirectory1).First(f => Path.GetExtension(f) == ".exe");//args[2]
+            string playerExe1 = Directory.GetFiles(playerDirectory1).First(f => Path.GetExtension(f) == ".exe");
             string playerId2 = "Player2";
-            string playerExe2 = Directory.GetFiles(playerDirectory2).First(f => Path.GetExtension(f) == ".exe");//args[4]
+            string playerExe2 = Directory.GetFiles(playerDirectory2).First(f => Path.GetExtension(f) == ".exe");
             string resultsPath = resultsDirectory;
 
             string gameExe = Directory.GetFiles(gameDir).First(f => Path.GetExtension(f) == ".exe");

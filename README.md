@@ -47,6 +47,7 @@ Below is a tentative (and non-exhaustive) list of steps I'll be taking.
 * [X] Write a .net core implementation of a tic-tac-toe game based on the concept of a "game" with "players" outlined above
 * [X] Write a console app "host" that that allows playing the above game
 * [X] Write wrappers for "players" and "games" so that hosts can communicate with players and/or games in different processes, online, etc.
+* [ ] Find a way for DotNetPlayerHost and ExeGameHost to avoid "hardcoding" the class they instantiate.
 * [ ] Write a good Tic Tac Toe player in Javascript (node.js) and host to communicate with it in a different process
 
 ### Long-Term
