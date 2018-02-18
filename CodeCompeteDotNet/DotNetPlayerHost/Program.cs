@@ -2,8 +2,9 @@
 using Newtonsoft.Json;
 using CodeCompete.DotNet.Interfaces;
 using CodeCompete.DotNet.Implementation;
+
+// TODO: I need to get rid of this
 using CodeCompete.DotNet.TicTacToe.Players;
-using CodeCompete.DotNet.TicTacToe;
 
 namespace CodeCompete.DotNet.PlayerHost
 {
@@ -24,7 +25,7 @@ namespace CodeCompete.DotNet.PlayerHost
 
             GameState<string[][]> state = JsonConvert.DeserializeObject<GameState<string[][]>>(System.IO.File.ReadAllText(inPath));
             // TODO: Use DI/IoC container to fix this because an abstract getter can't be used for static classes
-            var player = new SimpleComputerTicTacToePlayer(id);
+            GamePlayer<string[][]> player = new SimpleComputerTicTacToePlayer(id);
             GameMove<string[][]> move = player.DoMove(state);
 
             System.IO.File.WriteAllText(outPath, JsonConvert.SerializeObject(move));

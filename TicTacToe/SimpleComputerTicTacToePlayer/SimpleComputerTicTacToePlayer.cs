@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Immutable;
+﻿using System.Linq;
 using CodeCompete.DotNet.Interfaces;
 
 namespace CodeCompete.DotNet.TicTacToe.Players
@@ -28,7 +26,7 @@ namespace CodeCompete.DotNet.TicTacToe.Players
                 string[] row = board[r];
                 for (int c = 0; c < row.Length; c++)
                 {
-                    if (String.IsNullOrWhiteSpace(row[c]))
+                    if (string.IsNullOrWhiteSpace(row[c]))
                     {
                         string[][] newBoard = board.Select(s => s.ToArray()).ToArray();
                         newBoard[r][c] = this.Id;

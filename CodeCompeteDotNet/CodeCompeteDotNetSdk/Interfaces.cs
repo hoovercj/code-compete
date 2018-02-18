@@ -49,7 +49,7 @@ namespace CodeCompete.DotNet.Interfaces
 
     public class GamePlayer<T>
     {
-        public virtual string Id { get; }
+        public virtual string Id { get; set; }
 
         public virtual GameMove<T> DoMove(GameState<T> game) { return null; }
     }
