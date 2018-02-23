@@ -3,18 +3,18 @@ using System.Linq;
 using System.Collections.Immutable;
 using CodeCompete.DotNet.Interfaces;
 
-namespace CodeCompete.DotNet.TicTacToe.Players
+namespace CodeCompete.DotNet.TicTacToe
 {
-    public class ConsolePlayer : GamePlayer<string[][]>
+    public class ConsolePlayer : GamePlayer<Move>
     {
         public ConsolePlayer() {}
 
-        public override GameMove<string[][]> DoMove(IGameStateProvider stateProvider)
+        public override GameMove<Move> DoMove(IGameStateProvider stateProvider)
         {
-            var state = stateProvider.ProvideState<string[][]>();
+            var state = stateProvider.ProvideState<Move>();
             var states = state.GameMoves;
-            GameMove<string[][]> lastState = states[states.Length -1];
-            string[][] board = lastState.State;
+            GameMove<Move> lastState = states[states.Length -1];
+            string[][] board = lastState.State.Board;
 
             this.PrintBoard(board);
 
@@ -40,7 +40,7 @@ namespace CodeCompete.DotNet.TicTacToe.Players
 
             newBoard[chosenRow][chosenColumn] = this.Id;
 
-            return new GameMove<string[][]>(this.Id, newBoard);
+            return new GameMove<Move>(this.Id, new Move { Board = newBoard });
         }
 
         private bool ValidateChoice(string[][] board, int row, int col)
@@ -80,7 +80,6 @@ namespace CodeCompete.DotNet.TicTacToe.Players
                 }
                 Console.Write(Environment.NewLine + Environment.NewLine);
             }
-
         }
     }
 }

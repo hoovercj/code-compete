@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using CodeCompete.DotNet.Interfaces;
 
-namespace CodeCompete.DotNet.GameName.Players
+namespace CodeCompete.DotNet.GameName
 {
     public class PlayerName : GamePlayer<object>
     {

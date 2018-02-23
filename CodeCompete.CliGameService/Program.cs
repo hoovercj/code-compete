@@ -24,7 +24,7 @@ namespace CodeCompete.GameService
                 }
             }
 
-            string resultsDirectory = Path.Combine(directory, "results");
+            string resultsDirectory = Path.Combine(Environment.CurrentDirectory, "results");
             if (Directory.Exists(resultsDirectory)) {
                 Directory.Delete(resultsDirectory);
             }
@@ -35,7 +35,8 @@ namespace CodeCompete.GameService
             int gameChoice;
             while (!PromptUserForChoice("game", gameDirectories, out gameChoice)) {};
             string gameDir = gameDirectories[gameChoice];
-            string[] playerDirectories = Directory.GetDirectories(gameDir);
+            string gameExeDir = Path.Combine(gameDir, "Game");
+            string[] playerDirectories = Directory.GetDirectories(Path.Combine(gameDir, "Players"));
 
             int playerChoice1;
             while (!PromptUserForChoice("player", playerDirectories, out playerChoice1)) {};
@@ -51,7 +52,7 @@ namespace CodeCompete.GameService
             string playerExe2 = Directory.GetFiles(playerDirectory2).First(f => Path.GetExtension(f) == ".exe");
             string resultsPath = resultsDirectory;
 
-            string gameExe = Directory.GetFiles(gameDir).First(f => Path.GetExtension(f) == ".exe");
+            string gameExe = Directory.GetFiles(gameExeDir).First(f => Path.GetExtension(f) == ".exe");
             string gameArgs = $"{playerId1} {playerExe1} {playerId2} {playerExe2} {resultsPath}";
 
             Console.WriteLine($"Starting game process: {gameExe} {string.Join(" ", gameArgs)}");

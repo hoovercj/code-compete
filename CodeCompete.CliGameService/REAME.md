@@ -1,16 +1,36 @@
 # CliGameService
 
-CliGameService will look in a subdirectory from where it is run called `Games/` (can be overridden by passing a path). Each subdirectory in `Games/` should have an `exe` for the game, and subdirectories for all players capable of playing the game, each with their own exe. Example below:
+CliGameService will look in a subdirectory from where it is run called `Games/` (can be overridden by passing a path). Each subdirectory in `Games/` should have an `exe` for the game, and subdirectories for all players capable of playing the game, each with their own exe.
 
-        Games
+CliGameService will ask users to pick a game and then pick two players for that game. The game and player processes will be spawned and state is passed between them by writing to files.
+
+## Adding games and players
+
+First a game must be registered, then its players can be registered. The process may differ as more languages are supported, but for now only dotnet is supported.
+
+For dotnet games, the game template is copied  to `Lib/Dotnet/Games/GameName` and the game file is copied into the template from its source location. This allows the game to be available to children projects. From there, the game is "published" to generate an exe and the the output files are copied to `Games/GameName`.
+
+The process is similar for players. The player template is copied to `Lib/Dotnet/Games/GameName/PlayerName` and the player file is copied into the template from its source location with a reference to the SDK and Game library properly referenced. Then, just like the game, it is "published" to generate an exe and the output files are copied to `Games/GameName/PlayerName`.
+
+Example below:
+
+        Games/
         |---- Game1/
         |     |---- Player1/
         |     |---- Player2/
         |---- Game2/
-              |---- Player2/
-              |---- Player3/
-
-CliGameService will ask users to pick a game and then pick two players for that game. The game and player processes will be spawned and state is passed between them by writing to files.
+        |      |---- Player2/
+        |      |---- Player3/
+        Lib/
+        |---- Dotnet
+              |---- SDK/
+              |---- Games/
+                    |---- Game1/
+                    |     |---- Player1/
+                    |     |---- Player2/
+                    |---- Game2/
+                          |---- Player2/
+                          |---- Player3/
 
 ## Architecture
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeCompete.DotNet.Interfaces;
-using CodeCompete.DotNet.TicTacToe.Games;
-using CodeCompete.DotNet.TicTacToe.Players;
+using CodeCompete.DotNet.TicTacToe;
 
 namespace CodeCompete.DotNet.Examples
 {
@@ -13,10 +12,10 @@ namespace CodeCompete.DotNet.Examples
             player1.Id = "1";
             var player2 = new ConsolePlayer();
             player2.Id = "2";
-            var game = new CodeCompete.DotNet.TicTacToe.Games.TicTacToe(new GamePlayer<string[][]>[] { player1, player2});
+            var game = new CodeCompete.DotNet.TicTacToe.TicTacToe(new GamePlayer<Move>[] { player1, player2});
 
             var result = game.PlayGame();
-            var finalState = result.GameMoves[result.GameMoves.Length - 1].State;
+            var finalState = result.GameMoves[result.GameMoves.Length - 1].State.Board;
 
             for (int i = 0; i < finalState.Length; i++)
             {

@@ -17,7 +17,7 @@
         },
         "PlayerName": {
             "type": "parameter",
-            "defaultValue": "GameName",
+            "defaultValue": "PlayerName",
             "replaces": "PlayerName"
         }
     }

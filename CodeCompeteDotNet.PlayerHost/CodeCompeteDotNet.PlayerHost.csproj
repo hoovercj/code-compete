@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <Reference Include="CodeCompeteDotNet.Sdk">
+      <HintPath>lib\CodeCompeteDotNet.Sdk.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <!-- You may set it to true if your dll has a specific version -->
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Update path -->
-    <ProjectReference Include="..\CodeCompeteDotNet.Sdk\CodeCompeteDotNet.Sdk.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
 </Project>

@@ -2,38 +2,41 @@
 using Newtonsoft.Json;
 using CodeCompete.DotNet.Interfaces;
 using CodeCompete.DotNet.Implementation;
-using CodeCompete.DotNet.GameName.Players;
+using CodeCompete.DotNet.GameName;
 
-class Program
+namespace CodeCompete.DotNet.GameHost
 {
-    static void Main(string[] args)
+    class Program
     {
-        int i = 0;
-        string id = args[i++];
-        string inPath = args[i++];
-        string outPath = args[i++];
+        static void Main(string[] args)
+        {
+            int i = 0;
+            string id = args[i++];
+            string inPath = args[i++];
+            string outPath = args[i++];
 
-        var player = new PlayerName();
-        player.Id = id;
+            var player = new PlayerName();
+            player.Id = id;
 
-        System.IO.File.WriteAllText(outPath, JsonConvert.SerializeObject(
-                player.DoMove(new StateProvider(inPath))
-            )
-        );
-    }
-}
-
-
-class StateProvider : IGameStateProvider
-{
-    private string path;
-    public StateProvider(string path)
-    {
-        this.path = path;
+            System.IO.File.WriteAllText(outPath, JsonConvert.SerializeObject(
+                    player.DoMove(new StateProvider(inPath))
+                )
+            );
+        }
     }
 
-    public GameState<T> ProvideState<T>()
+
+    class StateProvider : IGameStateProvider
     {
-        return JsonConvert.DeserializeObject<GameState<T>>(System.IO.File.ReadAllText(this.path));
+        private string path;
+        public StateProvider(string path)
+        {
+            this.path = path;
+        }
+
+        public GameState<T> ProvideState<T>()
+        {
+            return JsonConvert.DeserializeObject<GameState<T>>(System.IO.File.ReadAllText(this.path));
+        }
     }
 }

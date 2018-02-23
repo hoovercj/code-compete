@@ -3,7 +3,7 @@ using System.IO;
 using Newtonsoft.Json;
 using CodeCompete.DotNet.Interfaces;
 using CodeCompete.DotNet.Implementation;
-using CodeCompete.DotNet.GameName.Games;
+using CodeCompete.DotNet.GameName;
 
 namespace CodeCompete.DotNet.GameHost
 {
@@ -19,10 +19,10 @@ namespace CodeCompete.DotNet.GameHost
             string resultsPath = args[i++];
             string finalResultsPath = Path.Combine(resultsPath, "results.json");
 
-            var player1 = new PlayerProxy<object>(playerId1, resultsPath, playerPath1);
-            var player2 = new PlayerProxy<object>(playerId2, resultsPath, playerPath2);
+            var player1 = new PlayerProxy<Move>(playerId1, resultsPath, playerPath1);
+            var player2 = new PlayerProxy<Move>(playerId2, resultsPath, playerPath2);
 
-            var game = new CodeCompete.DotNet.GameName.Games.GameName(new GamePlayer<object>[] { player1, player2});
+            var game = new CodeCompete.DotNet.GameName.GameName(new GamePlayer<Move>[] { player1, player2});
 
             var result = game.PlayGame();
 
