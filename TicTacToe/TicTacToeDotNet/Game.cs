@@ -7,19 +7,19 @@ using Newtonsoft.Json;
 
 namespace CodeCompete.DotNet.TicTacToe
 {
-    public class TicTacToeGame : AbstractGame<string[][]>
+    public class TicTacToe : AbstractGame<Move>
     {
         private bool isOver;
-        private GamePlayer<string[][]> winner;
+        private GamePlayer<Move> winner;
         private int currentPlayerIndex = 0;
 
         private ImmutableDictionary<string, int> playerToNumberMap;
 
-        protected override GamePlayer<string[][]> Winner => winner;
+        protected override GamePlayer<Move> Winner => winner;
         protected override bool IsOver => isOver;
-        protected override GamePlayer<string[][]> CurrentPlayer => players[currentPlayerIndex];
+        protected override GamePlayer<Move> CurrentPlayer => players[currentPlayerIndex];
 
-        public TicTacToeGame(GamePlayer<string[][]>[] players)
+        public TicTacToe(GamePlayer<Move>[] players)
         {
             if (players.Length != 2) throw new ArgumentOutOfRangeException(nameof(players), "Tic Tac Toe requires exactly 2 players");
             if (players[0].Id == players[1].Id) throw new ArgumentException(nameof(players), "Players cannot have the same Id");
@@ -32,10 +32,12 @@ namespace CodeCompete.DotNet.TicTacToe
             }
             .ToImmutableDictionary();
 
-            GameMove<string[][]> move = new GameMove<string[][]>(null, new string[][] {
-                new string[] {null, null, null},
-                new string[] {null, null, null},
-                new string[] {null, null, null}
+            GameMove<Move> move = new GameMove<Move>(null, new Move {
+                Board = new string[][] {
+                    new string[] {null, null, null},
+                    new string[] {null, null, null},
+                    new string[] {null, null, null}
+                }
             });
 
             this.moves = ImmutableArray.Create(move);
@@ -50,16 +52,16 @@ namespace CodeCompete.DotNet.TicTacToe
             this.currentPlayerIndex = ++this.currentPlayerIndex % 2;
         }
 
-        protected GamePlayer<string[][]> GetWinner(GameMove<string[][]> move)
+        protected GamePlayer<Move> GetWinner(GameMove<Move> move)
         {
             int[] colSums = new int[3];
             int[] rowSums = new int[3];
             int diagSum1 = 0;
             int diagSum2 = 0;
 
-            GamePlayer<string[][]> winner = null;
+            GamePlayer<Move> winner = null;
 
-            string[][] board = move.State;
+            string[][] board = move.State.Board;
 
             for (int r = 0; r < board.Length; r++)
             {
@@ -96,7 +98,7 @@ namespace CodeCompete.DotNet.TicTacToe
             return null;
         }
 
-        private GamePlayer<string[][]> CheckScore(int score)
+        private GamePlayer<Move> CheckScore(int score)
         {
             // TODO: abstract the connection between players and the score
             if (score == -3)
@@ -113,7 +115,7 @@ namespace CodeCompete.DotNet.TicTacToe
             }
         }
 
-        protected override bool ValidateMove(GameState<string[][]> game, GameMove<string[][]> move)
+        protected override bool ValidateMove(GameState<Move> game, GameMove<Move> move)
         {
 
             string expectedPlayerId = this.CurrentPlayer.Id;
@@ -129,9 +131,9 @@ namespace CodeCompete.DotNet.TicTacToe
             // TODO: proper validation;
         }
 
-        private bool MovesLeft(GameMove<string[][]> move)
+        private bool MovesLeft(GameMove<Move> move)
         {
-            string[][] board = move.State;
+            string[][] board = move.State.Board;
 
             for (int r = 0; r < board.Length; r++)
             {

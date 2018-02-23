@@ -1,20 +1,21 @@
 ﻿using System;
 using CodeCompete.DotNet.Interfaces;
 using CodeCompete.DotNet.TicTacToe;
-using CodeCompete.DotNet.TicTacToe.Players;
 
-namespace CodeComplete.DotNet.Examples
+namespace CodeCompete.DotNet.Examples
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var player1 = new ConsoleTicTacToePlayer("1");
-            var player2 = new SimpleComputerTicTacToePlayer("2");
-            var game = new TicTacToeGame(new GamePlayer<string[][]>[] { player1, player2});
+            var player1 = new SimpleComputerPlayer();
+            player1.Id = "1";
+            var player2 = new ConsolePlayer();
+            player2.Id = "2";
+            var game = new CodeCompete.DotNet.TicTacToe.TicTacToe(new GamePlayer<Move>[] { player1, player2});
 
             var result = game.PlayGame();
-            var finalState = result.GameMoves[result.GameMoves.Length - 1].State;
+            var finalState = result.GameMoves[result.GameMoves.Length - 1].State.Board;
 
             for (int i = 0; i < finalState.Length; i++)
             {

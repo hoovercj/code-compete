@@ -4,7 +4,7 @@ A platform for code competitions where programmable "players" compete in a varie
 
 The long-term goal is to have a platform that allows users to submit a "game" written in one of several languages. Users can then submit "players" for that game in the supported language of their choice.
 
-Then users can pit their players against others.
+Then users can then pit their players against players made by other users.
 
 ## Try it out
 
@@ -47,7 +47,8 @@ Below is a tentative (and non-exhaustive) list of steps I'll be taking.
 * [X] Write a .net core implementation of a tic-tac-toe game based on the concept of a "game" with "players" outlined above
 * [X] Write a console app "host" that that allows playing the above game
 * [X] Write wrappers for "players" and "games" so that hosts can communicate with players and/or games in different processes, online, etc.
-* [ ] Find a way for DotNetPlayerHost and ExeGameHost to avoid "hardcoding" the class they instantiate.
+* [X] Find a way for DotNetPlayerHost and ExeGameHost to avoid "hardcoding" the class they instantiate.
+    * Solution: Use dotnet templates
 * [ ] Write a good Tic Tac Toe player in Javascript (node.js) and host to communicate with it in a different process
 
 ### Long-Term

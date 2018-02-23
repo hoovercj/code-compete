@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Cody Hoover",
+    "classifications": [ "Common", "Console" ],
+    "identity": "CodeCompete.GameTemplate.CSharp",
+    "name": "Code Compete Game Template",
+    "shortName": "codecompetegame",
+    "tags": {
+        "language": "C#",
+        "type":"project"
+    },
+    "symbols": {
+        "GameName": {
+            "type": "parameter",
+            "defaultValue": "Game",
+            "replaces": "GameName"
+        }
+    }
+}
