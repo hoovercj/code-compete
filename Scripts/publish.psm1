@@ -1,4 +1,4 @@
-$ProjectDirRoot = "Lib\Dotnet\Games\"
+$ProjectDirRoot = "GameProjects\Dotnet\"
 
 function Get-ProjectDirForGame
 {
