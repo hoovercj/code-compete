@@ -4,7 +4,7 @@
 To publish the tic tac toe game and run this service:
 
 ```
-../scripts/publishTicTacToe
+../scripts/publishTicTacToe.ps1
 dotnet run
 ```
 

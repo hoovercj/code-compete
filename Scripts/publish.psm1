@@ -1,4 +1,4 @@
-$ProjectDirRoot = "GameProjects\Dotnet\"
+$ProjectDirRoot = "$PSScriptRoot\..\GameProjects\Dotnet\"
 
 function Get-ProjectDirForGame
 {
@@ -25,7 +25,7 @@ Param(
 )
     $GameProjectDir = Get-ProjectDirForGame $GameName
     $GamePublishDir = "$GameProjectDir\bin\Release\netcoreapp2.0\win10-x64\publish"
-    $GameOutDir = "CodeCompete.CliGameService\Games\$GameName\Game"
+    $GameOutDir = "$PSScriptRoot\..\CodeCompete.CliGameService\Games\$GameName\Game"
 
     if (Test-Path -Path $GameProjectDir)
     {
@@ -58,7 +58,7 @@ Param(
 
     $PlayerProjectDir = Get-ProjectDirForPlayer $GameName $PlayerName
     $PlayerPublishDir = "$PlayerProjectDir\bin\Release\netcoreapp2.0\win10-x64\publish"
-    $PlayerOutDir = "CodeCompete.CliGameService\Games\$GameName\Players\$PlayerName"
+    $PlayerOutDir = "$PSScriptRoot\..\CodeCompete.CliGameService\Games\$GameName\Players\$PlayerName"
 
     Write-Host "Creating new template..."
     dotnet new codecompeteplayer -o $PlayerProjectDir --PlayerName $PlayerName --GameName $GameName --force
@@ -73,3 +73,11 @@ Param(
 
     # Remove-Item $PlayerProjectDir -Recurse
 }
+
+function Install-DotnetTemplates
+{
+    dotnet new -i $PSScriptRoot\..\CodeCompeteDotNet.GameHost\
+    dotnet new -i $PSScriptRoot\..\CodeCompeteDotNet.PlayerHost\
+}
+
+Export-ModuleMember *-*
